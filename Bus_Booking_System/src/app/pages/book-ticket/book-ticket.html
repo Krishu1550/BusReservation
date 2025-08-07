@@ -1,1 +1,30 @@
-<p>book-ticket works!</p>
+<div class="row mt-4">
+  @if (busInfos.length > 0) {
+    <div class="col-12">
+      @for (bus of busInfos; track bus.scheduleId) {
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">{{ bus.busName }} - {{ bus.busVehicleNo }}</h5>
+            <p class="card-text">
+              <strong>From:</strong> {{ bus.fromLocationName }} |
+              <strong>To:</strong> {{ bus.toLocationName }} <br>
+              <strong>Departure:</strong> {{ bus.departureTime }} |
+              <strong>Arrival:</strong> {{ bus.arrivalTime }} <br>
+              <strong>Date:</strong> {{ bus.scheduleDate }} |
+              <strong>Vendor:</strong> {{ bus.vendorName }} <br>
+              <strong>Available Seats:</strong> {{ bus.availableSeats }} / {{ bus.totalSeats }} <br>
+              <strong>Price:</strong> ₹{{ bus.price }}
+            </p>
+            <button class="btn btn-success" (click)="navigateBus(bus)" >Book Now</button>
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="col-12">
+      <div class="alert alert-warning text-center">
+        No buses found for the selected route and date.
+      </div>
+    </div>
+  }
+</div>

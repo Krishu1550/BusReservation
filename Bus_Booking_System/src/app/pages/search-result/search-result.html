@@ -1,1 +1,77 @@
-<p>search-result works!</p>
+<div class=" card my-5">
+    <div class="row">
+        <div class="col-3">
+            <p> <strong>Bus Name: </strong> {{busDetail.busName}}</p>
+        </div>
+        <div class="col-3">
+            <strong>Bus No:</strong> {{busDetail.busVehicleNo}}
+        </div>
+        <div class="col-3">
+            <strong> Departure Time: </strong>{{busDetail.departureTime | date: 'h:mm a'
+            }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <strong>Arrival Time: </strong>{{busDetail.arrivalTime | date: 'h:mm a' }}
+        </div>
+        <div class="col-3">
+            <strong>ScheduleDate: </strong>{{busDetail.scheduleDate | date: 'dd/MM/yyyy' }}
+        </div>
+        <div class="col-3">
+            <strong>Price: </strong>{{busDetail.price}}
+        </div>
+    </div>
+
+</div>
+
+<div class=" row my-5">
+
+    <div class=" card col-6">
+        <div class="container"> <strong>Select Seats </strong></div>
+        <div class="row">
+            @for(seat of seatNumbers; track seat)
+            {
+            <button (click)=" toggleSeat(seat)" class="btn btn-outline-primary m-1 col-2">{{seat}}</button>
+
+            }
+        </div>
+    </div>
+
+    <div class=" card col-6">
+        <div class="container"> <strong> Customer Information </strong></div>
+
+        <div><strong>Total Price: {{totalPrice}} INR</strong> </div>
+        @for(seat of selectedSeats; track seat )
+        {
+        <div class="border p-3 mb-3">
+            <h5>Seat: {{ seat }} | Price: {{ busDetail.price }}</h5>
+
+            <form>
+                <div class="mb-2">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="customerDetails[seat].name"
+                        name="name-{{seat}}">
+                </div>
+
+                <div class="mb-2">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" [(ngModel)]="customerDetails[seat].email"
+                        name="email-{{seat}}">
+                </div>
+
+                <div class="mb-2">
+                    <label class="form-label">Phone</label>
+                    <input type="tel" class="form-control" [(ngModel)]="customerDetails[seat].phone"
+                        name="phone-{{seat}}">
+                </div>
+            </form>
+        </div>
+        }
+        @empty{
+        <div>No Buses</div>
+        }
+
+    </div>
+
+</div>

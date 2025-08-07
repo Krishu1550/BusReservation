@@ -17,11 +17,11 @@ export const routes: Routes = [
     component:SearchBus
 },
 {
-    path: "search-result",
+    path: "search-result/:scheduleId",
     component: SearchResult
 },
 {
-    path:"book-ticket",
+    path:"book-ticket/:from/:to/:date",
     component: BookTicket
 },
 
